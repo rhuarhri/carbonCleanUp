@@ -10,16 +10,34 @@
 import UIKit
 import Charts
 
-class ViewController: UIViewController {
 
+class ViewController: UIViewController {
+    
+    
     @IBOutlet weak var userPerformanceChart: LineChartView!
+    
+    
+    @IBOutlet weak var COTwoDataView: UIView!
+    @IBOutlet weak var COTwoDataTXT: UILabel!
+    
+    
+    @IBOutlet weak var TreeDataView: UIView!
+    @IBOutlet weak var TreeDataTXT: UILabel!
+    
+    @IBOutlet weak var OffsetBTN: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         
+        COTwoDataView.layer.cornerRadius = 15.0
+        TreeDataView.layer.cornerRadius = 15.0
+        OffsetBTN.layer.cornerRadius = 15.0
+        
         userPerformanceChart.chartDescription?.text = "description"
-        userPerformanceChart.gridBackgroundColor = UIColor.white
+        let lineColour = UIColor(red: 0.30, green: 0.62, blue: 0.23, alpha: 1.0);
+        userPerformanceChart.gridBackgroundColor = lineColour
         
         let ll = ChartLimitLine(limit: 10.0, label: "Average")
         userPerformanceChart.rightAxis.addLimitLine(ll)
@@ -29,6 +47,7 @@ class ViewController: UIViewController {
     
     func setChartValues(count : Int = 20)
     {
+        
         
         let values = (0 ..< count).map{(i) -> ChartDataEntry in
             let val = Double(i)//Double(arc4random_uniform(UInt32(count)) + 3)
@@ -44,4 +63,6 @@ class ViewController: UIViewController {
 
 
 }
+
+
 
