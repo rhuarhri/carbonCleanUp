@@ -1,0 +1,6 @@
+framework module Pods_carbonCleanUpTests {
+  umbrella header "Pods-carbonCleanUpTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
