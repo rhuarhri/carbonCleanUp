@@ -20,6 +20,8 @@
 		2C21E2C723F44381006C5E1C /* CO2 icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C523F44381006C5E1C /* CO2 icon.png */; };
 		2C21E2C923F44395006C5E1C /* tree icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C823F44395006C5E1C /* tree icon.png */; };
 		2C21E2CF23F449F3006C5E1C /* UiSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21E2CE23F449F3006C5E1C /* UiSetup.swift */; };
+		2CDB7FF723F5505300D0CBFC /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB7FF623F5505300D0CBFC /* SetupViewController.swift */; };
+		2CDB7FF923F553E900D0CBFC /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB7FF823F553E900D0CBFC /* PopupViewController.swift */; };
 		5AA931FDF31DB992785C5870 /* Pods_carbonCleanUpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2B62B35A48C5A8DAB822D07 /* Pods_carbonCleanUpTests.framework */; };
 		AD09F8D19A2E1A976CEBD269 /* Pods_carbonCleanUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9B0B2F1E4610C1159FADDF /* Pods_carbonCleanUp.framework */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,8 @@
 		2C21E2C523F44381006C5E1C /* CO2 icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CO2 icon.png"; sourceTree = "<group>"; };
 		2C21E2C823F44395006C5E1C /* tree icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tree icon.png"; sourceTree = "<group>"; };
 		2C21E2CE23F449F3006C5E1C /* UiSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiSetup.swift; sourceTree = "<group>"; };
+		2CDB7FF623F5505300D0CBFC /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		2CDB7FF823F553E900D0CBFC /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		317EE7983A0A9CDDFA2C7AD0 /* Pods-carbonCleanUp-carbonCleanUpUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbonCleanUp-carbonCleanUpUITests.release.xcconfig"; path = "Target Support Files/Pods-carbonCleanUp-carbonCleanUpUITests/Pods-carbonCleanUp-carbonCleanUpUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6F9CDF235D508C6E1A1A729E /* Pods-carbonCleanUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbonCleanUp.debug.xcconfig"; path = "Target Support Files/Pods-carbonCleanUp/Pods-carbonCleanUp.debug.xcconfig"; sourceTree = "<group>"; };
 		9B252BBEAC82CFCD12880E13 /* Pods-carbonCleanUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbonCleanUp.release.xcconfig"; path = "Target Support Files/Pods-carbonCleanUp/Pods-carbonCleanUp.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 				2C21E29623F3FBA0006C5E1C /* Info.plist */,
 				2C21E28E23F3FB9B006C5E1C /* carbonCleanUp.xcdatamodeld */,
 				2C21E2CE23F449F3006C5E1C /* UiSetup.swift */,
+				2CDB7FF623F5505300D0CBFC /* SetupViewController.swift */,
+				2CDB7FF823F553E900D0CBFC /* PopupViewController.swift */,
 			);
 			path = carbonCleanUp;
 			sourceTree = "<group>";
@@ -425,7 +431,9 @@
 				2C21E28623F3FB9B006C5E1C /* AppDelegate.swift in Sources */,
 				2C21E28823F3FB9B006C5E1C /* SceneDelegate.swift in Sources */,
 				2C21E29023F3FB9B006C5E1C /* carbonCleanUp.xcdatamodeld in Sources */,
+				2CDB7FF723F5505300D0CBFC /* SetupViewController.swift in Sources */,
 				2C21E2CF23F449F3006C5E1C /* UiSetup.swift in Sources */,
+				2CDB7FF923F553E900D0CBFC /* PopupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

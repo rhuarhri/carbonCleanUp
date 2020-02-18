@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var TreeDataTXT: UILabel!
     
     @IBOutlet weak var OffsetBTN: UIButton!
+    @IBOutlet weak var travelBTN: UIButton!
+    @IBOutlet weak var shoppingBTN: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,8 @@ class ViewController: UIViewController {
         COTwoDataView.layer.cornerRadius = 15.0
         TreeDataView.layer.cornerRadius = 15.0
         OffsetBTN.layer.cornerRadius = 15.0
+        travelBTN.layer.cornerRadius = 15.0
+        shoppingBTN.layer.cornerRadius = 15.0
         
         userPerformanceChart.chartDescription?.text = "description"
         let lineColour = UIColor(red: 0.30, green: 0.62, blue: 0.23, alpha: 1.0);
