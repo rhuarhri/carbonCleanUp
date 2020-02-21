@@ -40,10 +40,11 @@ class ViewController: UIViewController {
         shoppingBTN.layer.cornerRadius = 15.0
         
         userPerformanceChart.chartDescription?.text = "description"
-        let lineColour = UIColor(red: 0.30, green: 0.62, blue: 0.23, alpha: 1.0);
+        let lineColour = UIColor.white //UIColor(red: 0.30, green: 0.62, blue: 0.23, alpha: 1.0);
         userPerformanceChart.gridBackgroundColor = lineColour
         
         let ll = ChartLimitLine(limit: 10.0, label: "Average")
+        ll.lineColor = UIColor.blue
         userPerformanceChart.rightAxis.addLimitLine(ll)
         
         setChartValues()
@@ -60,6 +61,11 @@ class ViewController: UIViewController {
         
         let set1 = LineChartDataSet(entries: values, label: "dataset1")
         set1.colors = [UIColor.white]
+        set1.drawCirclesEnabled = false
+        set1.drawFilledEnabled = true
+        let lineColour = UIColor(red: 0.30, green: 0.62, blue: 0.23, alpha: 1.0);//UIColor.white
+        set1.fillColor = lineColour
+        set1.fillAlpha = 0.8
         let data = LineChartData(dataSet: set1)
         
         self.userPerformanceChart.data = data
