@@ -9,10 +9,14 @@
 
 import UIKit
 import Charts
+import CoreData
+import Firebase
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    //core data will store achieved acheivements
+    //firebase will store one yet ot be completed
     
     @IBOutlet weak var userPerformanceChart: LineChartView!
     
@@ -48,6 +52,46 @@ class ViewController: UIViewController {
         userPerformanceChart.rightAxis.addLimitLine(ll)
         
         setChartValues()
+        
+        load()
+    }
+    
+    func load()
+    {
+        var result : [NSManagedObject] = []
+        var currentEmission : Float = 0
+        
+        guard let appDelegate =
+          UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext =
+          appDelegate.persistentContainer.viewContext
+        
+        
+        do {
+            
+        let fetchRequest =
+          NSFetchRequest<NSManagedObject>(entityName: "Emissions")
+          result = try managedContext.fetch(fetchRequest)
+            if result.isEmpty == false
+            {
+                for i in result
+                {
+                    currentEmission += i.value(forKey: "total") as? Float ?? 1.0
+                }
+                
+                currentEmission = round(currentEmission / 0.1) * 0.1
+                COTwoDataTXT.text = "\(currentEmission)"
+                print("current emission is \(currentEmission)")
+            }
+            
+        } catch let error as NSError {
+          print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        
     }
     
     func setChartValues(count : Int = 20)
@@ -70,6 +114,29 @@ class ViewController: UIViewController {
         
         self.userPerformanceChart.data = data
     }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell : AchievementsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "itemCell") as! AchievementsTableViewCell
+        
+            //cell.nameTXT.text = electronics[indexPath.row].value(forKey: "name") as? String
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+
 
 
 }

@@ -4,16 +4,25 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Emissions" representedClassName="Emissions" syncable="YES" codeGenerationType="class">
+        <attribute name="total" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="NameItem" representedClassName="NameItem" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Trees" representedClassName="Trees" syncable="YES" codeGenerationType="class">
+        <attribute name="total" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES" codeGenerationType="class">
+        <attribute name="fule" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="NameItem" positionX="-54" positionY="-9" width="128" height="58"/>
         <element name="Electronics" positionX="-54" positionY="0" width="128" height="73"/>
-        <element name="Vehicle" positionX="-45" positionY="18" width="128" height="73"/>
+        <element name="Emissions" positionX="-45" positionY="27" width="128" height="58"/>
+        <element name="NameItem" positionX="-54" positionY="-9" width="128" height="58"/>
+        <element name="Vehicle" positionX="-45" positionY="18" width="128" height="88"/>
+        <element name="Trees" positionX="-45" positionY="27" width="128" height="58"/>
     </elements>
 </model>

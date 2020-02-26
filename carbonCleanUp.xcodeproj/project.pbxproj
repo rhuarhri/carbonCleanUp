@@ -20,8 +20,14 @@
 		2C21E2C723F44381006C5E1C /* CO2 icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C523F44381006C5E1C /* CO2 icon.png */; };
 		2C21E2C923F44395006C5E1C /* tree icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C823F44395006C5E1C /* tree icon.png */; };
 		2C21E2CF23F449F3006C5E1C /* UiSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21E2CE23F449F3006C5E1C /* UiSetup.swift */; };
+		2C43ADB024052B24001F71FE /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C43ADAF24052B24001F71FE /* DonationViewController.swift */; };
 		2C47932523FE995400A6EF69 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47932423FE995400A6EF69 /* ItemTableViewCell.swift */; };
 		2C48289123FD7AFE0016594D /* TravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48289023FD7AFE0016594D /* TravelViewController.swift */; };
+		2C4A417C240002880042C42E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C4A417B240002880042C42E /* GoogleService-Info.plist */; };
+		2C5117E024030DF900547593 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5117DF24030DF900547593 /* RecordViewController.swift */; };
+		2C5117E2240318EE00547593 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5117E1240318EE00547593 /* RecordTableViewCell.swift */; };
+		2C56DAA42403DC7400611CD0 /* AchievementsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C56DAA32403DC7400611CD0 /* AchievementsTableViewCell.swift */; };
+		2C57993B2406838E002628BC /* DonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57993A2406838E002628BC /* DonationTableViewCell.swift */; };
 		2CDB7FF723F5505300D0CBFC /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB7FF623F5505300D0CBFC /* SetupViewController.swift */; };
 		2CDB7FF923F553E900D0CBFC /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB7FF823F553E900D0CBFC /* PopupViewController.swift */; };
 		5AA931FDF31DB992785C5870 /* Pods_carbonCleanUpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2B62B35A48C5A8DAB822D07 /* Pods_carbonCleanUpTests.framework */; };
@@ -65,8 +71,14 @@
 		2C21E2C523F44381006C5E1C /* CO2 icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CO2 icon.png"; sourceTree = "<group>"; };
 		2C21E2C823F44395006C5E1C /* tree icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tree icon.png"; sourceTree = "<group>"; };
 		2C21E2CE23F449F3006C5E1C /* UiSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiSetup.swift; sourceTree = "<group>"; };
+		2C43ADAF24052B24001F71FE /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		2C47932423FE995400A6EF69 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		2C48289023FD7AFE0016594D /* TravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelViewController.swift; sourceTree = "<group>"; };
+		2C4A417B240002880042C42E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2C5117DF24030DF900547593 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		2C5117E1240318EE00547593 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
+		2C56DAA32403DC7400611CD0 /* AchievementsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewCell.swift; sourceTree = "<group>"; };
+		2C57993A2406838E002628BC /* DonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationTableViewCell.swift; sourceTree = "<group>"; };
 		2CDB7FF623F5505300D0CBFC /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		2CDB7FF823F553E900D0CBFC /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		317EE7983A0A9CDDFA2C7AD0 /* Pods-carbonCleanUp-carbonCleanUpUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbonCleanUp-carbonCleanUpUITests.release.xcconfig"; path = "Target Support Files/Pods-carbonCleanUp-carbonCleanUpUITests/Pods-carbonCleanUp-carbonCleanUpUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,12 +166,18 @@
 				2C21E29123F3FBA0006C5E1C /* Assets.xcassets */,
 				2C21E29323F3FBA0006C5E1C /* LaunchScreen.storyboard */,
 				2C21E29623F3FBA0006C5E1C /* Info.plist */,
+				2C4A417B240002880042C42E /* GoogleService-Info.plist */,
 				2C21E28E23F3FB9B006C5E1C /* carbonCleanUp.xcdatamodeld */,
 				2C21E2CE23F449F3006C5E1C /* UiSetup.swift */,
 				2CDB7FF623F5505300D0CBFC /* SetupViewController.swift */,
 				2CDB7FF823F553E900D0CBFC /* PopupViewController.swift */,
 				2C48289023FD7AFE0016594D /* TravelViewController.swift */,
 				2C47932423FE995400A6EF69 /* ItemTableViewCell.swift */,
+				2C5117DF24030DF900547593 /* RecordViewController.swift */,
+				2C5117E1240318EE00547593 /* RecordTableViewCell.swift */,
+				2C56DAA32403DC7400611CD0 /* AchievementsTableViewCell.swift */,
+				2C43ADAF24052B24001F71FE /* DonationViewController.swift */,
+				2C57993A2406838E002628BC /* DonationTableViewCell.swift */,
 			);
 			path = carbonCleanUp;
 			sourceTree = "<group>";
@@ -306,6 +324,7 @@
 				2C21E28D23F3FB9B006C5E1C /* Main.storyboard in Resources */,
 				2C21E2C923F44395006C5E1C /* tree icon.png in Resources */,
 				2C21E2C723F44381006C5E1C /* CO2 icon.png in Resources */,
+				2C4A417C240002880042C42E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,14 +453,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C21E28A23F3FB9B006C5E1C /* ViewController.swift in Sources */,
+				2C56DAA42403DC7400611CD0 /* AchievementsTableViewCell.swift in Sources */,
 				2C47932523FE995400A6EF69 /* ItemTableViewCell.swift in Sources */,
+				2C43ADB024052B24001F71FE /* DonationViewController.swift in Sources */,
 				2C21E28623F3FB9B006C5E1C /* AppDelegate.swift in Sources */,
 				2C48289123FD7AFE0016594D /* TravelViewController.swift in Sources */,
 				2C21E28823F3FB9B006C5E1C /* SceneDelegate.swift in Sources */,
 				2C21E29023F3FB9B006C5E1C /* carbonCleanUp.xcdatamodeld in Sources */,
 				2CDB7FF723F5505300D0CBFC /* SetupViewController.swift in Sources */,
+				2C57993B2406838E002628BC /* DonationTableViewCell.swift in Sources */,
+				2C5117E024030DF900547593 /* RecordViewController.swift in Sources */,
 				2C21E2CF23F449F3006C5E1C /* UiSetup.swift in Sources */,
 				2CDB7FF923F553E900D0CBFC /* PopupViewController.swift in Sources */,
+				2C5117E2240318EE00547593 /* RecordTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

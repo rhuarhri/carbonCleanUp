@@ -6,6 +6,9 @@ target 'carbonCleanUp' do
   use_frameworks!
 
 	pod 'Charts'
+	pod 'Firebase/Core'
+	pod 'Firebase/Database'
+	pod 'Firebase/Firestore'
 
   # Pods for carbonCleanUp
 
