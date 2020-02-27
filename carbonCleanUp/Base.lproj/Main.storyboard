@@ -65,7 +65,7 @@
                                     <constraint firstAttribute="height" constant="68" id="saL-g5-jpr"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aua-hp-Ypl">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aua-hp-Ypl" customClass="CustomTextButton" customModule="carbonCleanUp" customModuleProvider="target">
                                 <rect key="frame" x="167" y="225" width="80" height="50"/>
                                 <color key="backgroundColor" name="primaryDarkColor"/>
                                 <constraints>
@@ -80,7 +80,7 @@
                                     <segue destination="yMM-67-MTZ" kind="show" id="bMF-aO-QHN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuf-JO-Kle">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuf-JO-Kle" customClass="CustomTextButton" customModule="carbonCleanUp" customModuleProvider="target">
                                 <rect key="frame" x="10" y="295" width="190" height="50"/>
                                 <color key="backgroundColor" name="primaryDarkColor"/>
                                 <constraints>
@@ -134,7 +134,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koj-2z-5SJ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koj-2z-5SJ" customClass="CustomTextButton" customModule="carbonCleanUp" customModuleProvider="target">
                                 <rect key="frame" x="214" y="295" width="190" height="50"/>
                                 <color key="backgroundColor" name="primaryDarkColor"/>
                                 <constraints>
@@ -221,7 +221,7 @@
                                     <constraint firstAttribute="height" constant="68" id="zP2-iL-JKg"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1a1-xl-YCf">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1a1-xl-YCf" customClass="CustomTextButton" customModule="carbonCleanUp" customModuleProvider="target">
                                 <rect key="frame" x="30" y="88" width="354" height="42"/>
                                 <color key="backgroundColor" name="primaryDarkColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -364,36 +364,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="record travel page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkF-GT-ViG">
-                                <rect key="frame" x="137" y="0.0" width="140" height="21"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjf-6l-84Z">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="822"/>
+                                <connections>
+                                    <outlet property="delegate" destination="lkc-Dt-Z1g" id="c4I-lW-ygy"/>
+                                </connections>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xee-QJ-OW4">
+                                <rect key="frame" x="275" y="0.0" width="139" height="32"/>
+                                <color key="backgroundColor" name="primaryLightColor"/>
+                                <segments>
+                                    <segment title="Normal"/>
+                                    <segment title="Satellite"/>
+                                </segments>
+                            </segmentedControl>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Qb-jR-s2l">
+                                <rect key="frame" x="263" y="716" width="144" height="99"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="lkc-Dt-Z1g" id="Qqg-8B-dvL"/>
+                                    <outlet property="delegate" destination="lkc-Dt-Z1g" id="oXi-fL-ogx"/>
+                                </connections>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Travelling by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OG-IG-yQg">
+                                <rect key="frame" x="20" y="689" width="96" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="primaryColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Usx-dq-vgN">
-                                <rect key="frame" x="20" y="51" width="374" height="607"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LvG-Sf-TE8">
+                                <rect key="frame" x="20" y="718" width="235" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="lkc-Dt-Z1g" id="VOa-hH-Lef"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Roe-8Z-IYI">
-                                <rect key="frame" x="176" y="731" width="62" height="30"/>
+                                <color key="backgroundColor" name="primaryColor"/>
+                                <segments>
+                                    <segment title="Plane"/>
+                                    <segment title="Train"/>
+                                    <segment title="Car"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Car name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQi-Oj-FSi">
+                                <rect key="frame" x="181" y="757" width="74" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add data"/>
-                                <connections>
-                                    <action selector="addBTN:" destination="lkc-Dt-Z1g" eventType="touchUpInside" id="L6L-85-gEq"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="primaryColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="bjf-6l-84Z" firstAttribute="trailing" secondItem="CIR-HA-j35" secondAttribute="trailing" id="88n-sz-CUW"/>
+                            <constraint firstItem="bjf-6l-84Z" firstAttribute="leading" secondItem="CIR-HA-j35" secondAttribute="leading" id="8X7-vf-Yy0"/>
+                            <constraint firstItem="xee-QJ-OW4" firstAttribute="top" secondItem="CIR-HA-j35" secondAttribute="top" id="HRb-hB-tPb"/>
+                            <constraint firstItem="bjf-6l-84Z" firstAttribute="top" secondItem="CIR-HA-j35" secondAttribute="top" id="cvm-05-zsc"/>
+                            <constraint firstItem="xee-QJ-OW4" firstAttribute="trailing" secondItem="CIR-HA-j35" secondAttribute="trailing" id="fRq-If-GMY"/>
+                            <constraint firstAttribute="bottom" secondItem="bjf-6l-84Z" secondAttribute="bottom" constant="20" symbolic="YES" id="lpb-z0-x4M"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="CIR-HA-j35"/>
                     </view>
                     <navigationItem key="navigationItem" id="x09-ji-ogU"/>
                     <connections>
-                        <outlet property="dataTable" destination="Usx-dq-vgN" id="8OI-Ul-AGi"/>
+                        <outlet property="carsPicker" destination="1Qb-jR-s2l" id="ejI-SC-Sp2"/>
+                        <outlet property="mapView" destination="bjf-6l-84Z" id="jzH-1R-doD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8v-td-qEg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -540,7 +572,7 @@
                                     <outlet property="delegate" destination="NMJ-JA-woN" id="05T-R2-2Gg"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxT-Wd-BTV">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxT-Wd-BTV" customClass="CustomTextButton" customModule="carbonCleanUp" customModuleProvider="target">
                                 <rect key="frame" x="306" y="725" width="54" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="primaryDarkColor"/>
@@ -741,7 +773,7 @@
                                 <color key="textColor" name="primaryTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="guP-T9-0Q6">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="guP-T9-0Q6" customClass="CustomTextField" customModule="carbonCleanUp" customModuleProvider="target">
                                 <rect key="frame" x="82" y="196" width="252" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -791,7 +823,7 @@
                                     <segment title="Van"/>
                                 </segments>
                             </segmentedControl>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sa8-Yg-K9f">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sa8-Yg-K9f" customClass="CustomTextField" customModule="carbonCleanUp" customModuleProvider="target">
                                 <rect key="frame" x="82" y="393" width="252" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>

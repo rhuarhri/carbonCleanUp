@@ -26,7 +26,7 @@ class DonationViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        BuyOffsetBTN.layer.cornerRadius = 15.0
+        
         load()
     }
     

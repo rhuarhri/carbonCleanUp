@@ -8,32 +8,112 @@
 
 import UIKit
 import CoreData
+import MapKit
+import CoreLocation
 
 
+class TravelViewController: UIViewController {
 
-class TravelViewController: UIViewController, UITableViewDataSource {
-
-    @IBOutlet weak var dataTable: UITableView!
+    var cars : [NSManagedObject] = []
     
-    public var names: [NSManagedObject] = []
+    @IBOutlet weak var carsPicker: UIPickerView!
     
+    @IBOutlet weak var mapView: MKMapView!
     
+    var locationManager : CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        /*
-        var title = "The List"
-        dataTable.register(UITableViewCell.self,
-                           forCellReuseIdentifier: "ItemCell")
- */
         
-        //dataTable.delegate = self as UITableViewDelegate
-        //dataTable.dataSource = self as UITableViewDataSource
-        
-        self.dataTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        checkLocationPermission()
+        load()
     }
     
+    func checkLocationPermission()
+    {
+        if CLLocationManager.locationServicesEnabled()
+        {
+            setUpManager()
+            checkLocationAuthorised()
+        }
+        else
+        {
+            //no access to location
+        }
+    }
+    
+    func setUpManager()
+    {
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+    }
+    
+    func checkLocationAuthorised()
+    {
+        switch CLLocationManager.authorizationStatus()
+        {
+        case .denied:
+            
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            //stopped by parental controls
+            break
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+            centreViewOnUserLocation()
+            locationManager.startUpdatingLocation()
+            break
+        case .authorizedAlways:
+            
+            break
+        default:
+            break
+        }
+    }
+    
+    func centreViewOnUserLocation()
+    {
+        let latMeters : Double = 100
+        let longMeters : Double = 100
+        //the above variables state how much the map should be zoomed in
+        
+        if let location = locationManager.location?.coordinate
+        {
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: latMeters, longitudinalMeters: longMeters)
+            mapView.setRegion(region, animated: true)
+        }
+    
+    }
+    
+    func load()
+    {
+        
+        guard let appDelegate =
+          UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext =
+          appDelegate.persistentContainer.viewContext
+        
+        do {
+            
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Vehicle")
+            cars = try managedContext.fetch(fetchRequest)
+            
+        } catch let error as NSError {
+          print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        carsPicker.reloadAllComponents()
+    }
+    
+    
+    /*
     override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
       
@@ -139,7 +219,50 @@ class TravelViewController: UIViewController, UITableViewDataSource {
         cell.textLabel?.text = person.value(forKeyPath: "name") as? String
         
         return cell
-    }
+    }*/
     
 
+}
+
+extension TravelViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let latMeters : Double = 100
+        let longMeters : Double = 100
+        
+        guard let location = locations.last else { return }
+        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: latMeters, longitudinalMeters: longMeters)
+        mapView.setRegion(region, animated: true)
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        //checkLocationPermission()
+    }
+}
+
+extension TravelViewController: UIPickerViewDataSource
+{
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return cars.count
+    }
+    
+}
+
+extension TravelViewController: UIPickerViewDelegate
+{
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return cars[row].value(forKey: "name") as? String ?? ""
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+    }
 }

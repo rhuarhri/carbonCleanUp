@@ -37,11 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Do any additional setup after loading the view.
         
-        COTwoDataView.layer.cornerRadius = 15.0
-        TreeDataView.layer.cornerRadius = 15.0
-        OffsetBTN.layer.cornerRadius = 15.0
-        travelBTN.layer.cornerRadius = 15.0
-        shoppingBTN.layer.cornerRadius = 15.0
+        
         
         userPerformanceChart.chartDescription?.text = "description"
         let lineColour = UIColor.white //UIColor(red: 0.30, green: 0.62, blue: 0.23, alpha: 1.0);

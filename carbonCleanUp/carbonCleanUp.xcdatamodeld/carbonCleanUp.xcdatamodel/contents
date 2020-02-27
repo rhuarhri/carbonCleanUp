@@ -14,7 +14,7 @@
         <attribute name="total" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES" codeGenerationType="class">
-        <attribute name="fule" optional="YES" attributeType="String"/>
+        <attribute name="fuel" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
@@ -22,7 +22,7 @@
         <element name="Electronics" positionX="-54" positionY="0" width="128" height="73"/>
         <element name="Emissions" positionX="-45" positionY="27" width="128" height="58"/>
         <element name="NameItem" positionX="-54" positionY="-9" width="128" height="58"/>
-        <element name="Vehicle" positionX="-45" positionY="18" width="128" height="88"/>
         <element name="Trees" positionX="-45" positionY="27" width="128" height="58"/>
+        <element name="Vehicle" positionX="-45" positionY="18" width="128" height="88"/>
     </elements>
 </model>

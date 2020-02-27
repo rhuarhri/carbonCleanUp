@@ -20,6 +20,8 @@
 		2C21E2C723F44381006C5E1C /* CO2 icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C523F44381006C5E1C /* CO2 icon.png */; };
 		2C21E2C923F44395006C5E1C /* tree icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C823F44395006C5E1C /* tree icon.png */; };
 		2C21E2CF23F449F3006C5E1C /* UiSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21E2CE23F449F3006C5E1C /* UiSetup.swift */; };
+		2C409DEA2407C4A000B39583 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C409DE92407C4A000B39583 /* CustomTextField.swift */; };
+		2C409DEC2407CA9B00B39583 /* CustomTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C409DEB2407CA9B00B39583 /* CustomTextButton.swift */; };
 		2C43ADB024052B24001F71FE /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C43ADAF24052B24001F71FE /* DonationViewController.swift */; };
 		2C47932523FE995400A6EF69 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47932423FE995400A6EF69 /* ItemTableViewCell.swift */; };
 		2C48289123FD7AFE0016594D /* TravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48289023FD7AFE0016594D /* TravelViewController.swift */; };
@@ -71,6 +73,8 @@
 		2C21E2C523F44381006C5E1C /* CO2 icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CO2 icon.png"; sourceTree = "<group>"; };
 		2C21E2C823F44395006C5E1C /* tree icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tree icon.png"; sourceTree = "<group>"; };
 		2C21E2CE23F449F3006C5E1C /* UiSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiSetup.swift; sourceTree = "<group>"; };
+		2C409DE92407C4A000B39583 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		2C409DEB2407CA9B00B39583 /* CustomTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextButton.swift; sourceTree = "<group>"; };
 		2C43ADAF24052B24001F71FE /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		2C47932423FE995400A6EF69 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		2C48289023FD7AFE0016594D /* TravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 				2C56DAA32403DC7400611CD0 /* AchievementsTableViewCell.swift */,
 				2C43ADAF24052B24001F71FE /* DonationViewController.swift */,
 				2C57993A2406838E002628BC /* DonationTableViewCell.swift */,
+				2C409DE92407C4A000B39583 /* CustomTextField.swift */,
+				2C409DEB2407CA9B00B39583 /* CustomTextButton.swift */,
 			);
 			path = carbonCleanUp;
 			sourceTree = "<group>";
@@ -465,7 +471,9 @@
 				2C5117E024030DF900547593 /* RecordViewController.swift in Sources */,
 				2C21E2CF23F449F3006C5E1C /* UiSetup.swift in Sources */,
 				2CDB7FF923F553E900D0CBFC /* PopupViewController.swift in Sources */,
+				2C409DEC2407CA9B00B39583 /* CustomTextButton.swift in Sources */,
 				2C5117E2240318EE00547593 /* RecordTableViewCell.swift in Sources */,
+				2C409DEA2407C4A000B39583 /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

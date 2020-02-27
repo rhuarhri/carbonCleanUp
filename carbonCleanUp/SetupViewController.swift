@@ -34,6 +34,7 @@ class SetupViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         //self.itemsTV.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
+        
         load()
     }
     
