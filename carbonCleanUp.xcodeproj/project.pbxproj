@@ -20,6 +20,7 @@
 		2C21E2C723F44381006C5E1C /* CO2 icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C523F44381006C5E1C /* CO2 icon.png */; };
 		2C21E2C923F44395006C5E1C /* tree icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C823F44395006C5E1C /* tree icon.png */; };
 		2C21E2CF23F449F3006C5E1C /* UiSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21E2CE23F449F3006C5E1C /* UiSetup.swift */; };
+		2C3CCB89242A722800EB0C4B /* PayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3CCB88242A722800EB0C4B /* PayViewController.swift */; };
 		2C409DEA2407C4A000B39583 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C409DE92407C4A000B39583 /* CustomTextField.swift */; };
 		2C409DEC2407CA9B00B39583 /* CustomTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C409DEB2407CA9B00B39583 /* CustomTextButton.swift */; };
 		2C43ADB024052B24001F71FE /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C43ADAF24052B24001F71FE /* DonationViewController.swift */; };
@@ -30,6 +31,10 @@
 		2C5117E2240318EE00547593 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5117E1240318EE00547593 /* RecordTableViewCell.swift */; };
 		2C56DAA42403DC7400611CD0 /* AchievementsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C56DAA32403DC7400611CD0 /* AchievementsTableViewCell.swift */; };
 		2C57993B2406838E002628BC /* DonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57993A2406838E002628BC /* DonationTableViewCell.swift */; };
+		2C9675EB2429117400834CD7 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9675EA2429117400834CD7 /* DatabaseManager.swift */; };
+		2CD5F79D2421276E0040950D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5F79C2421276E0040950D /* WelcomeViewController.swift */; };
+		2CD5F79F242127A80040950D /* CarSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5F79E242127A80040950D /* CarSetupViewController.swift */; };
+		2CD5F7A1242127ED0040950D /* AppliancesSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5F7A0242127ED0040950D /* AppliancesSetupViewController.swift */; };
 		2CDB7FF723F5505300D0CBFC /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB7FF623F5505300D0CBFC /* SetupViewController.swift */; };
 		2CDB7FF923F553E900D0CBFC /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB7FF823F553E900D0CBFC /* PopupViewController.swift */; };
 		5AA931FDF31DB992785C5870 /* Pods_carbonCleanUpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2B62B35A48C5A8DAB822D07 /* Pods_carbonCleanUpTests.framework */; };
@@ -73,6 +78,7 @@
 		2C21E2C523F44381006C5E1C /* CO2 icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CO2 icon.png"; sourceTree = "<group>"; };
 		2C21E2C823F44395006C5E1C /* tree icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tree icon.png"; sourceTree = "<group>"; };
 		2C21E2CE23F449F3006C5E1C /* UiSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiSetup.swift; sourceTree = "<group>"; };
+		2C3CCB88242A722800EB0C4B /* PayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayViewController.swift; sourceTree = "<group>"; };
 		2C409DE92407C4A000B39583 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2C409DEB2407CA9B00B39583 /* CustomTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextButton.swift; sourceTree = "<group>"; };
 		2C43ADAF24052B24001F71FE /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +89,10 @@
 		2C5117E1240318EE00547593 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		2C56DAA32403DC7400611CD0 /* AchievementsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewCell.swift; sourceTree = "<group>"; };
 		2C57993A2406838E002628BC /* DonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationTableViewCell.swift; sourceTree = "<group>"; };
+		2C9675EA2429117400834CD7 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		2CD5F79C2421276E0040950D /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		2CD5F79E242127A80040950D /* CarSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarSetupViewController.swift; sourceTree = "<group>"; };
+		2CD5F7A0242127ED0040950D /* AppliancesSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppliancesSetupViewController.swift; sourceTree = "<group>"; };
 		2CDB7FF623F5505300D0CBFC /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		2CDB7FF823F553E900D0CBFC /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		317EE7983A0A9CDDFA2C7AD0 /* Pods-carbonCleanUp-carbonCleanUpUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbonCleanUp-carbonCleanUpUITests.release.xcconfig"; path = "Target Support Files/Pods-carbonCleanUp-carbonCleanUpUITests/Pods-carbonCleanUp-carbonCleanUpUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -184,6 +194,11 @@
 				2C57993A2406838E002628BC /* DonationTableViewCell.swift */,
 				2C409DE92407C4A000B39583 /* CustomTextField.swift */,
 				2C409DEB2407CA9B00B39583 /* CustomTextButton.swift */,
+				2CD5F79C2421276E0040950D /* WelcomeViewController.swift */,
+				2CD5F79E242127A80040950D /* CarSetupViewController.swift */,
+				2CD5F7A0242127ED0040950D /* AppliancesSetupViewController.swift */,
+				2C9675EA2429117400834CD7 /* DatabaseManager.swift */,
+				2C3CCB88242A722800EB0C4B /* PayViewController.swift */,
 			);
 			path = carbonCleanUp;
 			sourceTree = "<group>";
@@ -459,21 +474,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C21E28A23F3FB9B006C5E1C /* ViewController.swift in Sources */,
+				2C3CCB89242A722800EB0C4B /* PayViewController.swift in Sources */,
 				2C56DAA42403DC7400611CD0 /* AchievementsTableViewCell.swift in Sources */,
 				2C47932523FE995400A6EF69 /* ItemTableViewCell.swift in Sources */,
 				2C43ADB024052B24001F71FE /* DonationViewController.swift in Sources */,
 				2C21E28623F3FB9B006C5E1C /* AppDelegate.swift in Sources */,
+				2CD5F79D2421276E0040950D /* WelcomeViewController.swift in Sources */,
 				2C48289123FD7AFE0016594D /* TravelViewController.swift in Sources */,
 				2C21E28823F3FB9B006C5E1C /* SceneDelegate.swift in Sources */,
 				2C21E29023F3FB9B006C5E1C /* carbonCleanUp.xcdatamodeld in Sources */,
 				2CDB7FF723F5505300D0CBFC /* SetupViewController.swift in Sources */,
 				2C57993B2406838E002628BC /* DonationTableViewCell.swift in Sources */,
 				2C5117E024030DF900547593 /* RecordViewController.swift in Sources */,
+				2C9675EB2429117400834CD7 /* DatabaseManager.swift in Sources */,
 				2C21E2CF23F449F3006C5E1C /* UiSetup.swift in Sources */,
 				2CDB7FF923F553E900D0CBFC /* PopupViewController.swift in Sources */,
+				2CD5F7A1242127ED0040950D /* AppliancesSetupViewController.swift in Sources */,
 				2C409DEC2407CA9B00B39583 /* CustomTextButton.swift in Sources */,
 				2C5117E2240318EE00547593 /* RecordTableViewCell.swift in Sources */,
 				2C409DEA2407C4A000B39583 /* CustomTextField.swift in Sources */,
+				2CD5F79F242127A80040950D /* CarSetupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

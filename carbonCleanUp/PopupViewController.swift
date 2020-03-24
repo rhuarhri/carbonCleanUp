@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class PopupViewController: UIViewController {
 
@@ -14,10 +15,28 @@ class PopupViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        helpInstructTXT.text = message
+        //helpInstructTXT.text = message
+        
+        let collRef : CollectionReference = Firestore.firestore().collection("instructions")
+        
+        let helpQuery = collRef.whereField("type", isEqualTo: message)
+        
+        helpQuery.getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+                let result = document.data()
+                self.message = result["help"] as? String ?? "Unable to find anything."
+                self.helpInstructTXT.text = self.message
+                //self.performSegue(withIdentifier: "showHelpPopup", sender: instructions)
+            }
+        }
+        }
+        
     }
     
-    public var message = "no message found"
+    public var message : String = "no message found"
     
     @IBOutlet weak var helpInstructTXT: UITextView!
     

@@ -32,6 +32,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var travelBTN: UIButton!
     @IBOutlet weak var shoppingBTN: UIButton!
     
+    @IBOutlet weak var achievementsTV: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,10 +54,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         load()
     }
     
+    var currentEmission : Float = 0
     func load()
     {
         var result : [NSManagedObject] = []
-        var currentEmission : Float = 0
+        
         
         guard let appDelegate =
           UIApplication.shared.delegate as? AppDelegate else {
@@ -87,7 +90,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
           print("Could not fetch. \(error), \(error.userInfo)")
         }
         
+        getAchievements()
+    }
+    
+    var achievements : [String] = []
+    var achievementTargets : [Int] = []
+    func getAchievements()
+    {
+        let collRef : Query = Firestore.firestore().collection("achievements").order(by: "target")
         
+        collRef.getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+                let result = document.data()
+                self.achievements.append(result["name"] as? String ?? "error")
+                self.achievementTargets.append(result["target"] as? Int ?? 0)
+                
+            }
+        }
+            self.achievementsTV.reloadData()
+        }
     }
     
     func setChartValues(count : Int = 20)
@@ -117,20 +141,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return achievements.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : AchievementsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "itemCell") as! AchievementsTableViewCell
         
-            //cell.nameTXT.text = electronics[indexPath.row].value(forKey: "name") as? String
+        cell.nameTXT.text = achievements[indexPath.row]
+        var progress : Float = self.currentEmission / Float(achievementTargets[indexPath.row])
+        cell.progressPB.progress = progress
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 60
     }
 
 

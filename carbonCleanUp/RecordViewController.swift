@@ -20,6 +20,8 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
     
     var tableCells : [RecordTableViewCell] = []
     
+    let dataManager : DatabaseManger = DatabaseManger()
+    
     var domesticEmission : Float = 0.00
     var techEmission : Float = 0.00
     
@@ -67,6 +69,7 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
     func load()
     {
         
+        /*
         guard let appDelegate =
           UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -84,7 +87,10 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
             
         } catch let error as NSError {
           print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        }*/
+        
+        dataManager.setUp()
+        electronics = dataManager.getApplicances()
         
     }
     
@@ -187,16 +193,17 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
     
     func recordEmissions(adding : Float)
     {
-        var result : [NSManagedObject] = []
+        //var result : [NSManagedObject] = []
         //var currentEmission : Float = 0
         
+        /*
         guard let appDelegate =
           UIApplication.shared.delegate as? AppDelegate else {
             return
         }
         
         let managedContext =
-          appDelegate.persistentContainer.viewContext
+          appDelegate.persistentContainer.viewContext*/
         
         /*
         do {
@@ -208,9 +215,9 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
             
         } catch let error as NSError {
           print("Could not fetch. \(error), \(error.userInfo)")
-        }*/
+        }
         
-        //print("current emissions is \(currentEmission)")
+        print("current emissions is \(currentEmission)")
         
         let entity =
         NSEntityDescription.entity(forEntityName: "Emissions", in: managedContext)
@@ -227,9 +234,10 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
         catch
         {
             print(error)
-        }
+        }*/
         
-        
+        dataManager.setUp()
+        dataManager.addEmmission(emission: adding)
     }
     
 

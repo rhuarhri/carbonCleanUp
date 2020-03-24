@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
+//import SquareInAppPaymentsSDK
 
 class DonationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -152,6 +153,20 @@ class DonationViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     @IBAction func BuyOffsetBTNPressed(_ sender: Any) {
+        
+        
+        //let theme = SQIPTheme()
+        //theme.tintColor = .green
+        
+        //let cardEntry = SQIPCardEntryViewController(theme: theme)
+        //cardEntry.delegate = PayViewController() as! SQIPCardEntryViewControllerDelegate
+        
+        //cardEntry.show(PayViewController(), sender: 0)
+        
+        //navigationController?.pushViewController(cardEntry, animated: true)
+        
     }
     
 }
+
+

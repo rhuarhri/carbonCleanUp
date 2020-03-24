@@ -9,6 +9,9 @@ target 'carbonCleanUp' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Database'
 	pod 'Firebase/Firestore'
+	pod 'PayPal-iOS-SDK’, ‘~> 2.15'
+	pod 'SquareInAppPaymentsSDK'
+	pod 'Stripe'
 
   # Pods for carbonCleanUp
 

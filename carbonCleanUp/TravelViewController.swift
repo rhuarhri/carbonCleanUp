@@ -10,15 +10,21 @@ import UIKit
 import CoreData
 import MapKit
 import CoreLocation
-
+import Firebase
 
 class TravelViewController: UIViewController {
 
+    private var totalDistance : Int = 0
+    
     var cars : [NSManagedObject] = []
+    
+    let dataManager : DatabaseManger = DatabaseManger()
+    
+    @IBOutlet weak var travelSelector: UISegmentedControl!
     
     @IBOutlet weak var carsPicker: UIPickerView!
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var travelMV: MKMapView!
     
     var locationManager : CLLocationManager!
     
@@ -63,7 +69,7 @@ class TravelViewController: UIViewController {
             //stopped by parental controls
             break
         case .authorizedWhenInUse:
-            mapView.showsUserLocation = true
+            travelMV.showsUserLocation = true
             centreViewOnUserLocation()
             locationManager.startUpdatingLocation()
             break
@@ -75,6 +81,7 @@ class TravelViewController: UIViewController {
         }
     }
     
+    var route : [CLLocationCoordinate2D] = []
     func centreViewOnUserLocation()
     {
         let latMeters : Double = 100
@@ -84,7 +91,13 @@ class TravelViewController: UIViewController {
         if let location = locationManager.location?.coordinate
         {
             let region = MKCoordinateRegion(center: location, latitudinalMeters: latMeters, longitudinalMeters: longMeters)
-            mapView.setRegion(region, animated: true)
+            travelMV.setRegion(region, animated: true)
+            
+            //route.append(location)
+            
+            //let line = MKPolyline(coordinates: route, count: route.count)
+            
+            //self.travelMV.addOverlay(line)
         }
     
     }
@@ -92,6 +105,7 @@ class TravelViewController: UIViewController {
     func load()
     {
         
+        /*
         guard let appDelegate =
           UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -107,124 +121,250 @@ class TravelViewController: UIViewController {
             
         } catch let error as NSError {
           print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        }*/
+        
+        dataManager.setUp()
+        cars = dataManager.getVehicle()
         
         carsPicker.reloadAllComponents()
+        
+        //drawRoute()
+        
+        
     }
-    
     
     /*
-    override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      
+    func drawRoute()
+    {
+        let sourceLocation = CLLocationCoordinate2D(latitude: 40.759011, longitude: -73.984472)
+        let destinationLocation = CLLocationCoordinate2D(latitude: 40.748441, longitude: -73.985564)
         
-      //1
-      guard let appDelegate =
-        UIApplication.shared.delegate as? AppDelegate else {
-          return
-      }
-      
-      let managedContext =
-        appDelegate.persistentContainer.viewContext
-      
-      //2
-      let fetchRequest =
-        NSFetchRequest<NSManagedObject>(entityName: "NameItem")
-      
-      //3
-      do {
-        names = try managedContext.fetch(fetchRequest)
-      } catch let error as NSError {
-        print("Could not fetch. \(error), \(error.userInfo)")
-      }
+        var route : [CLLocationCoordinate2D] = []
+        route.append(sourceLocation)
+        route.append(destinationLocation)
+        
+        let line = MKPolyline(coordinates: route, count: route.count)
+        
+        self.travelMV.addOverlay(line)
+        
     }
     
-    
-    
-    @IBAction func addBTN(_ sender: Any) {
+    func recordRoute()
+    {
+        let sourceLocation = CLLocationCoordinate2D(latitude: 40.759011, longitude: -73.984472)
+        let destinationLocation = CLLocationCoordinate2D(latitude: 40.748441, longitude: -73.985564)
         
-        let alert = UIAlertController(title: "New Name",
-                                      message: "Add a new name",
-                                      preferredStyle: .alert)
+        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
+        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
         
-        let saveAction = UIAlertAction(title: "Save",
-                                       style: .default) {
-          [unowned self] action in
-                                        
-          guard let textField = alert.textFields?.first,
-            let nameToSave = textField.text else {
-              return
-          }
-          
-            self.save(name: nameToSave)
-            self.dataTable.reloadData()
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        let sourceAnnotation = MKPointAnnotation()
+        sourceAnnotation.title = "Times Square"
+        
+        if let location = sourcePlacemark.location {
+            sourceAnnotation.coordinate = location.coordinate
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .cancel)
         
-        alert.addTextField()
+        let destinationAnnotation = MKPointAnnotation()
+        destinationAnnotation.title = "Empire State Building"
         
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
+        if let location = destinationPlacemark.location {
+            destinationAnnotation.coordinate = location.coordinate
+        }
         
-        present(alert, animated: true)
-    }
-    
-    func save(name: String) {
-      
-      guard let appDelegate =
-        UIApplication.shared.delegate as? AppDelegate else {
-        return
-      }
-      
-      // 1
-      let managedContext =
-        appDelegate.persistentContainer.viewContext
-      
-      // 2
-      let entity =
-        NSEntityDescription.entity(forEntityName: "NameItem",
-                                   in: managedContext)!
-      
-      let person = NSManagedObject(entity: entity,
-                                   insertInto: managedContext)
-      
-      // 3
-      person.setValue(name, forKeyPath: "name")
-      
-      // 4
-      do {
-        try managedContext.save()
-        names.append(person)
-      } catch let error as NSError {
-        print("Could not save. \(error), \(error.userInfo)")
-      }
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        self.travelMV.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true )
         
-        let person = names[indexPath.row]
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = sourceMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .automobile
         
-        //cell.textLabel?.text = names[indexPath.row]
-        cell.textLabel?.text = person.value(forKeyPath: "name") as? String
+        // Calculate the direction
+        let directions = MKDirections(request: directionRequest)
         
-        return cell
+        directions.calculate {
+            (response, error) -> Void in
+            
+            guard let response = response else {
+                if let error = error {
+                    print("Error: \(error)")
+                }
+                
+                return
+            }
+            
+            let route = response.routes[0]
+            self.travelMV.addOverlay((route.polyline), level: MKOverlayLevel.aboveRoads)
+            
+            let rect = route.polyline.boundingMapRect
+            self.travelMV.setRegion(MKCoordinateRegion(rect), animated: true)
+        }
     }*/
     
+    var previousLocation : CLLocation? = nil
+    var distance : Double = 0
+    
+    @IBOutlet weak var distanceTXT: UILabel!
+    
+    var recordingDistance : Bool = false
+    
+    @IBOutlet weak var actionBTN: CustomTextButton!
+    
+    @IBAction func actionBTN(_ sender: Any) {
+        if (recordingDistance == false)
+        {
+            startRecordong()
+        }
+        else{
+            stopRecordong()
+        }
+    }
+    
+    func startRecordong()
+    {
+        setTravelType()
+        actionBTN.setTitle("Stop", for: .normal)
+        distance = 0
+        recordingDistance = true
+    }
+    
+    func stopRecordong()
+    {
+        actionBTN.setTitle("Start", for: .normal)
+        recordingDistance = false
+    }
+    
+    func saveTravel()
+    {
+        
+    }
+    
+    var travelType : String = ""
+    var carbonPerMile : Double = 0.0
+    func setTravelType()
+    {
+        travelType = travelSelector.titleForSegment(at: travelSelector.selectedSegmentIndex)!
+        
+        print("travel type is \(travelType)")
+        
+        if travelType == "Train"
+        {
+            setupTrain()
+        }
+        else if travelType == "Plane"
+        {
+            setupPlane()
+        }
+        else if travelType == "Car"
+        {
+            print("car selected")
+            setupCar()
+        }
+        else{
+            
+        }
+    }
+    
+    func setupPlane()
+    {
+        let collRef = Firestore.firestore().collection("plane")
+        collRef.getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+                let result = document.data()
+                self.carbonPerMile = result["consumption"] as? Double ?? 0.0
+            }
+            }
+        
+        }
 
+    }
+    
+    func setupTrain()
+    {
+        let collRef = Firestore.firestore().collection("train")
+        collRef.getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+                let result = document.data()
+                self.carbonPerMile = result["consumption"] as? Double ?? 0.0
+            }
+            }
+        
+        }
+
+    }
+    
+    func setupCar()
+    {
+        var carType : String = (cars[carsPicker.selectedRow(inComponent: 0)].value(forKey: "type") as? String)!
+        
+        print("car type is \(carType)")
+        
+        let collRef = Firestore.firestore().collection(carType)
+        collRef.getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+                let result = document.data()
+                self.carbonPerMile = result["consumption"] as? Double ?? 0.0
+                print("consumption is \(self.carbonPerMile)")
+            }
+            }
+        
+        }
+    }
+    
+    var emmission : Double = 0.0
+    
+    func saveEmmissions(emission : Float)
+    {
+        //should move into class
+        
+        /*
+        guard let appDelegate =
+          UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext =
+          appDelegate.persistentContainer.viewContext
+        
+        let entity =
+         NSEntityDescription.entity(forEntityName: "Emissions", in: managedContext)
+         
+         let item = NSManagedObject(entity: entity!, insertInto: managedContext)
+         
+        
+         
+         item.setValue(emmission, forKey: "total")
+         
+         do{
+             try managedContext.save()
+         }
+         catch
+         {
+             print(error)
+         }*/
+        
+        dataManager.setUp()
+        dataManager.addEmmission(emission: emission)
+    }
+    
+    
 }
 
-extension TravelViewController: CLLocationManagerDelegate {
+extension TravelViewController: CLLocationManagerDelegate, MKMapViewDelegate {
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -233,14 +373,73 @@ extension TravelViewController: CLLocationManagerDelegate {
         
         guard let location = locations.last else { return }
         let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: latMeters, longitudinalMeters: longMeters)
-        mapView.setRegion(region, animated: true)
+        travelMV.setRegion(region, animated: true)
+        
+        if previousLocation == nil
+        {
+            previousLocation = location
+        }
+        else
+        {
+            let currentLocation = location
+            let result = currentLocation.distance(from: previousLocation!)
+            distance = distance + Measurement(value: result, unit: UnitLength.miles).value
+            emmission = distance * carbonPerMile
+            //print("distance is \(distance)")
+            //print("carbon per mile is \(carbonPerMile)")
+            //distance = round(distance / 0.01) * 0.01
+            emmission = round(emmission / 100) //* 0.01
+            if (recordingDistance == true)
+            {
+                self.distanceTXT.text = "\(emmission)"
+            }
+            
+            print("emission is \(emmission)")
+            
+            previousLocation = location
+            
+        }
+        
     }
     
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         //checkLocationPermission()
     }
+    
+    /*
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        // Make sure we are rendering a polyline.
+        guard let polyline = overlay as? MKPolyline else {
+            return MKOverlayRenderer()
+        }
+
+        // Create a specialized polyline renderer and set the polyline properties.
+        let polylineRenderer = MKPolylineRenderer(overlay: polyline)
+        polylineRenderer.strokeColor = .black
+        polylineRenderer.lineWidth = 2
+        return polylineRenderer
+    }*/
+    
 }
+
+/*
+extension TravelViewController: MKMapViewDelegate
+{
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        // Make sure we are rendering a polyline.
+        guard let polyline = overlay as? MKPolyline else {
+            return MKOverlayRenderer()
+        }
+
+        // Create a specialized polyline renderer and set the polyline properties.
+        let polylineRenderer = MKPolylineRenderer(overlay: polyline)
+        polylineRenderer.strokeColor = .black
+        polylineRenderer.lineWidth = 2
+        return polylineRenderer
+    }
+}*/
 
 extension TravelViewController: UIPickerViewDataSource
 {

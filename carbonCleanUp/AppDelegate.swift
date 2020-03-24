@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 import Firebase
+//import PayPalMobile
+//import SquareInAppPaymentsSDK
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        Stripe.setDefaultPublishableKey("pk_test_BrfTB4bJcKFNVnWqcldpKo7N00Uh8uXM6Y")
+        
+        //SQIPInAppPaymentsSDK.squareApplicationID = "sandbox-sq0idb-1TTMKxlxgoVpYYIMw1tgFw"
+        //PayPalMobile.initializeWithClientIdsForEnvironments([PayPalEnvironmentProduction: "APP_ID_PAYPAL_LIVE_ENVIORNMENT", PayPalEnvironmentSandbox: "APP_ID_PAYPAL_SANDBOX_ENVIORNMENT"])
         
         return true
     }
