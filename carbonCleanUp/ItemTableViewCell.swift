@@ -12,7 +12,7 @@ class ItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var typeTXT: UILabel!
     
-    @IBOutlet weak var nameTXT: UITextView!
+    @IBOutlet weak var nameTXT: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

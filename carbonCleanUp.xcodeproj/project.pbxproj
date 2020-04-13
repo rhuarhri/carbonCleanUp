@@ -20,6 +20,10 @@
 		2C21E2C723F44381006C5E1C /* CO2 icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C523F44381006C5E1C /* CO2 icon.png */; };
 		2C21E2C923F44395006C5E1C /* tree icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C21E2C823F44395006C5E1C /* tree icon.png */; };
 		2C21E2CF23F449F3006C5E1C /* UiSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21E2CE23F449F3006C5E1C /* UiSetup.swift */; };
+		2C37CD98243E0B8F00CE259F /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C37CD97243E0B8F00CE259F /* NotificationHandler.swift */; };
+		2C37CD9A243E2A7400CE259F /* ShareHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C37CD99243E2A7400CE259F /* ShareHandler.swift */; };
+		2C37CD9C243E42B600CE259F /* facebook_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C37CD9B243E42B500CE259F /* facebook_icon.png */; };
+		2C37CD9E244239F700CE259F /* UpdateVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C37CD9D244239F700CE259F /* UpdateVehicleViewController.swift */; };
 		2C3CCB89242A722800EB0C4B /* PayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3CCB88242A722800EB0C4B /* PayViewController.swift */; };
 		2C409DEA2407C4A000B39583 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C409DE92407C4A000B39583 /* CustomTextField.swift */; };
 		2C409DEC2407CA9B00B39583 /* CustomTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C409DEB2407CA9B00B39583 /* CustomTextButton.swift */; };
@@ -78,6 +82,10 @@
 		2C21E2C523F44381006C5E1C /* CO2 icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CO2 icon.png"; sourceTree = "<group>"; };
 		2C21E2C823F44395006C5E1C /* tree icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tree icon.png"; sourceTree = "<group>"; };
 		2C21E2CE23F449F3006C5E1C /* UiSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiSetup.swift; sourceTree = "<group>"; };
+		2C37CD97243E0B8F00CE259F /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		2C37CD99243E2A7400CE259F /* ShareHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareHandler.swift; sourceTree = "<group>"; };
+		2C37CD9B243E42B500CE259F /* facebook_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_icon.png; sourceTree = "<group>"; };
+		2C37CD9D244239F700CE259F /* UpdateVehicleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateVehicleViewController.swift; sourceTree = "<group>"; };
 		2C3CCB88242A722800EB0C4B /* PayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayViewController.swift; sourceTree = "<group>"; };
 		2C409DE92407C4A000B39583 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2C409DEB2407CA9B00B39583 /* CustomTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextButton.swift; sourceTree = "<group>"; };
@@ -171,6 +179,7 @@
 		2C21E28423F3FB9B006C5E1C /* carbonCleanUp */ = {
 			isa = PBXGroup;
 			children = (
+				2C37CD9B243E42B500CE259F /* facebook_icon.png */,
 				2C21E2C823F44395006C5E1C /* tree icon.png */,
 				2C21E2C523F44381006C5E1C /* CO2 icon.png */,
 				2C21E28523F3FB9B006C5E1C /* AppDelegate.swift */,
@@ -199,6 +208,9 @@
 				2CD5F7A0242127ED0040950D /* AppliancesSetupViewController.swift */,
 				2C9675EA2429117400834CD7 /* DatabaseManager.swift */,
 				2C3CCB88242A722800EB0C4B /* PayViewController.swift */,
+				2C37CD97243E0B8F00CE259F /* NotificationHandler.swift */,
+				2C37CD99243E2A7400CE259F /* ShareHandler.swift */,
+				2C37CD9D244239F700CE259F /* UpdateVehicleViewController.swift */,
 			);
 			path = carbonCleanUp;
 			sourceTree = "<group>";
@@ -341,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C21E29523F3FBA0006C5E1C /* LaunchScreen.storyboard in Resources */,
+				2C37CD9C243E42B600CE259F /* facebook_icon.png in Resources */,
 				2C21E29223F3FBA0006C5E1C /* Assets.xcassets in Resources */,
 				2C21E28D23F3FB9B006C5E1C /* Main.storyboard in Resources */,
 				2C21E2C923F44395006C5E1C /* tree icon.png in Resources */,
@@ -474,13 +487,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C21E28A23F3FB9B006C5E1C /* ViewController.swift in Sources */,
+				2C37CD9A243E2A7400CE259F /* ShareHandler.swift in Sources */,
 				2C3CCB89242A722800EB0C4B /* PayViewController.swift in Sources */,
 				2C56DAA42403DC7400611CD0 /* AchievementsTableViewCell.swift in Sources */,
+				2C37CD98243E0B8F00CE259F /* NotificationHandler.swift in Sources */,
 				2C47932523FE995400A6EF69 /* ItemTableViewCell.swift in Sources */,
 				2C43ADB024052B24001F71FE /* DonationViewController.swift in Sources */,
 				2C21E28623F3FB9B006C5E1C /* AppDelegate.swift in Sources */,
 				2CD5F79D2421276E0040950D /* WelcomeViewController.swift in Sources */,
 				2C48289123FD7AFE0016594D /* TravelViewController.swift in Sources */,
+				2C37CD9E244239F700CE259F /* UpdateVehicleViewController.swift in Sources */,
 				2C21E28823F3FB9B006C5E1C /* SceneDelegate.swift in Sources */,
 				2C21E29023F3FB9B006C5E1C /* carbonCleanUp.xcdatamodeld in Sources */,
 				2CDB7FF723F5505300D0CBFC /* SetupViewController.swift in Sources */,

@@ -20,6 +20,10 @@ class AppliancesSetupViewController: UIViewController, UITableViewDataSource, UI
     var electronics : [NSManagedObject] = []
     let dataManager : DatabaseManger = DatabaseManger()
     
+    @IBAction func backBTNPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,28 +32,6 @@ class AppliancesSetupViewController: UIViewController, UITableViewDataSource, UI
     
     func load()
     {
-        /*
-        
-        guard let appDelegate =
-          UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext =
-          appDelegate.persistentContainer.viewContext
-        
-        
-        do {
-            
-            let fetchRequest =
-          NSFetchRequest<NSManagedObject>(entityName: "Electronics")
-          electronics = try managedContext.fetch(fetchRequest)
-            
-            
-        } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
-        }*/
-        
         dataManager.setUp()
         electronics = dataManager.getApplicances()
         
@@ -57,35 +39,6 @@ class AppliancesSetupViewController: UIViewController, UITableViewDataSource, UI
     
     func save(name : String, type : String)
     {
-        /*
-        guard let appDelegate =
-          UIApplication.shared.delegate as? AppDelegate else {
-          return
-        }
-        
-        let managedContext =
-        appDelegate.persistentContainer.viewContext
-        
-        let entity =
-        NSEntityDescription.entity(forEntityName: "Electronics", in: managedContext)
-        
-        let item = NSManagedObject(entity: entity!, insertInto: managedContext)
-        
-        item.setValue(name, forKey: "name")
-        item.setValue(type, forKey: "type")
-        
-        
-        electronics.append(item)
-        
-        do{
-            try managedContext.save()
-        }
-        catch
-        {
-            print(error)
-        }*/
-        
-        
         dataManager.setUp()
         electronics.append(dataManager.addApplicances(name: name, type: type))
         
@@ -94,25 +47,6 @@ class AppliancesSetupViewController: UIViewController, UITableViewDataSource, UI
     }
     
     @IBAction func electricalItemsQuestionBTNPressed(_ sender: Any) {
-        
-        /*
-        var instructions : String = ""
-        
-        let collRef : CollectionReference = Firestore.firestore().collection("instructions")
-        
-        let helpQuery = collRef.whereField("type", isEqualTo: "items")
-        
-        helpQuery.getDocuments() { (querySnapshot, err) in
-        if let err = err {
-            print("Error getting documents: \(err)")
-        } else {
-            for document in querySnapshot!.documents {
-                let result = document.data()
-                instructions = result["help"] as? String ?? "Unable to find anything."
-                self.performSegue(withIdentifier: "showHelpPopup", sender: instructions)
-            }
-        }
-        }*/
         
         self.performSegue(withIdentifier: "showHelpPopup", sender: nil)
         
@@ -179,7 +113,7 @@ class AppliancesSetupViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 95
+        return 55
     }
 
 }

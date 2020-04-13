@@ -13,20 +13,26 @@ import Firebase
 
 class DonationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    let database = DatabaseManger()
     
-    @IBOutlet weak var COTwoTXT: UILabel!
+    //@IBOutlet weak var COTwoTXT: UILabel!
     @IBOutlet weak var BuyOffsetBTN: UIButton!
     @IBOutlet weak var TreeTXT: UILabel!
     
     @IBOutlet weak var charityTV: UITableView!
     
+    @IBAction func backBTNPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     var emissions : Float = 0
-    var treesOwned : Float = 0
+    var treesOwned : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        database.setUp()
         
         load()
     }
@@ -40,6 +46,7 @@ class DonationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func getTotalEmissions()
     {
+        /*
         var result : [NSManagedObject] = []
         var currentEmission : Float = 0
         
@@ -65,17 +72,21 @@ class DonationViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
                 
                 currentEmission = round(currentEmission / 0.1) * 0.1
-                COTwoTXT.text = "\(currentEmission)"
+                //COTwoTXT.text = "\(currentEmission)"
                 print("current emission is \(currentEmission)")
             }
             
         } catch let error as NSError {
           print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        }*/
+        
+        //var currentEmission : Float = database.getEmission()
+        //COTwoTXT.text = currentEmission.description
     }
     
     func getTotalTrees()
     {
+        /*
         var result : [NSManagedObject] = []
         var currentTotal : Int = 0
         
@@ -105,7 +116,10 @@ class DonationViewController: UIViewController, UITableViewDataSource, UITableVi
             
         } catch let error as NSError {
           print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        }*/
+        
+        treesOwned = database.getTrees()
+        TreeTXT.text = treesOwned.description
     }
     
     var charityNames : [String] = []
@@ -137,12 +151,47 @@ class DonationViewController: UIViewController, UITableViewDataSource, UITableVi
         return charityNames.count
     }
     
-    
+    var sharedTrees : Int = 0
+    var charityList = [DonationTableViewCell]()
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : DonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: "itemCell") as! DonationTableViewCell
         
-        cell.nameTXT.text = charityNames[indexPath.row]
+        charityList.append(cell)
+        
+        cell.name = charityNames[indexPath.row]
+        cell.nameTXT.text = cell.name
         cell.descriptionTXT.text = charityDescription[indexPath.row]
+        print("charity description is \(charityDescription[indexPath.row])")
+        
+        cell.action = {
+            
+            if Int(cell.AddTreeStepper.value) > cell.treeAmount
+            {
+                //add tree
+                if self.treesOwned > self.sharedTrees
+                {
+                    cell.treeAmount = Int(cell.AddTreeStepper.value)
+                    
+                    self.sharedTrees += 1
+                    
+                    let newValue = self.treesOwned - self.sharedTrees
+                    
+                    self.TreeTXT.text = newValue.description
+                }
+            }
+            else
+            {
+                //remove tree
+                cell.treeAmount = Int(cell.AddTreeStepper.value)
+                
+                self.sharedTrees -= 1
+                
+                let newValue = self.treesOwned - self.sharedTrees
+                
+                self.TreeTXT.text = newValue.description
+            }
+            
+        }
         
         
         return cell
@@ -164,6 +213,45 @@ class DonationViewController: UIViewController, UITableViewDataSource, UITableVi
         //cardEntry.show(PayViewController(), sender: 0)
         
         //navigationController?.pushViewController(cardEntry, animated: true)
+        
+    }
+    
+    @IBAction func doneBTNPressed(_ sender: Any) {
+        
+        let updatedTreeAmount = treesOwned - sharedTrees
+        
+        database.updateTrees(newTreeAmount: updatedTreeAmount)
+        
+        for charity in charityList
+        {
+            let collRef : Query = Firestore.firestore().collection("charities").whereField("name", isEqualTo: charity.name)
+            
+            collRef.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    
+                    let newDonation : [String:Any] =
+                    [
+                        "amount" : charity.treeAmount
+                    ]
+                    
+                    let charityRef = Firestore.firestore()
+                        .collection("charities/\(document.documentID)/donations")
+                    
+                    charityRef.addDocument(data: newDonation)
+                    
+                    self.dismiss(animated: true, completion: nil)
+                    
+                }
+            }
+            }
+            
+            
+        }
+        
+        
         
     }
     

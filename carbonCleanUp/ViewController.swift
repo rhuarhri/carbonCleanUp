@@ -20,6 +20,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var userPerformanceChart: LineChartView!
     
+    @IBAction func backBTNPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var COTwoDataView: UIView!
     @IBOutlet weak var COTwoDataTXT: UILabel!
@@ -34,61 +37,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var achievementsTV: UITableView!
     
+    let database = DatabaseManger()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         
-        
-        
-        userPerformanceChart.chartDescription?.text = "description"
-        let lineColour = UIColor.white //UIColor(red: 0.30, green: 0.62, blue: 0.23, alpha: 1.0);
+        userPerformanceChart.chartDescription?.text = "carbon footprint history"
+        let lineColour = UIColor.white
         userPerformanceChart.gridBackgroundColor = lineColour
         
-        let ll = ChartLimitLine(limit: 10.0, label: "Average")
+        let ll = ChartLimitLine(limit: 20000, label: "Average")
         ll.lineColor = UIColor.blue
         userPerformanceChart.rightAxis.addLimitLine(ll)
-        
-        setChartValues()
         
         load()
     }
     
     var currentEmission : Float = 0
+    var currentOffset : Float = 0.0
     func load()
     {
-        var result : [NSManagedObject] = []
+        database.setUp()
+        currentOffset = round(database.getOffsetAmount() / 0.1) * 0.1
+        currentEmission = round(database.getEmission() / 0.1) * 0.1
+        COTwoDataTXT.text = "\(currentEmission)"
         
+        let treeAmount = database.getTrees()
+        TreeDataTXT.text = treeAmount.description
         
-        guard let appDelegate =
-          UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext =
-          appDelegate.persistentContainer.viewContext
-        
-        
-        do {
-            
-        let fetchRequest =
-          NSFetchRequest<NSManagedObject>(entityName: "Emissions")
-          result = try managedContext.fetch(fetchRequest)
-            if result.isEmpty == false
-            {
-                for i in result
-                {
-                    currentEmission += i.value(forKey: "total") as? Float ?? 1.0
-                }
-                
-                currentEmission = round(currentEmission / 0.1) * 0.1
-                COTwoDataTXT.text = "\(currentEmission)"
-                print("current emission is \(currentEmission)")
-            }
-            
-        } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        setChartValues()
         
         getAchievements()
     }
@@ -114,23 +93,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func setChartValues(count : Int = 20)
+    func setChartValues()
     {
         
+        let recordedEmissions = database.getAllEmissions()
         
-        let values = (0 ..< count).map{(i) -> ChartDataEntry in
-            let val = Double(i)//Double(arc4random_uniform(UInt32(count)) + 3)
-            return ChartDataEntry(x: Double(i), y: val)
-        }
+        let values = (0 ..< recordedEmissions.count).map{(i) -> ChartDataEntry in
+            let yValue = recordedEmissions[i]
+            return ChartDataEntry(x: Double(i), y: Double(yValue))}
         
-        let set1 = LineChartDataSet(entries: values, label: "dataset1")
-        set1.colors = [UIColor.white]
-        set1.drawCirclesEnabled = false
-        set1.drawFilledEnabled = true
-        let lineColour = UIColor(red: 0.30, green: 0.62, blue: 0.23, alpha: 1.0);//UIColor.white
-        set1.fillColor = lineColour
-        set1.fillAlpha = 0.8
-        let data = LineChartData(dataSet: set1)
+        let emissionSet = LineChartDataSet(entries: values, label: "cardon emissions")
+        emissionSet.colors = [UIColor.white]
+        emissionSet.drawCirclesEnabled = false
+        emissionSet.drawFilledEnabled = true
+        let lineColour = UIColor(red: 0.30, green: 0.62, blue: 0.23, alpha: 1.0);
+        emissionSet.fillColor = lineColour
+        emissionSet.fillAlpha = 0.8
+        let data = LineChartData(dataSet: emissionSet)
         
         self.userPerformanceChart.data = data
     }
@@ -149,14 +128,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell : AchievementsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "itemCell") as! AchievementsTableViewCell
         
         cell.nameTXT.text = achievements[indexPath.row]
-        var progress : Float = self.currentEmission / Float(achievementTargets[indexPath.row])
+        let progress : Float = self.currentOffset / Float(achievementTargets[indexPath.row])
         cell.progressPB.progress = progress
+        
+        
+        cell.faceShareBTNPressed = {
+            //print("facebook share button pressed")
+            let shareAchievement = ShareHandler()
+            shareAchievement.shareOnFacebook(achievement: self.achievements[indexPath.row])
+            
+            if (shareAchievement.post != nil)
+            {
+                self.present(shareAchievement.post!, animated: true, completion: nil)
+            }
+            else{
+                self.present(shareAchievement.error!, animated: true, completion: nil)
+            }
+        }
+        
+       /* cell.facebookShareBTN.addTarget(self, action: Selector("subscribeTapped"), for: .touchUpInside)*/
         
         return cell
     }
     
+    func subscribeTapped(){
+     print("facebook button pressed")
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 100
     }
 
 

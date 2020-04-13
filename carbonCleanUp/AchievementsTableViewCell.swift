@@ -14,6 +14,9 @@ class AchievementsTableViewCell: UITableViewCell {
     @IBOutlet weak var nameTXT: UILabel!
     @IBOutlet weak var progressPB: UIProgressView!
     
+    var faceShareBTNPressed : (() -> Void)? = nil
+    
+    //@IBOutlet weak var facebookShareBTN: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,6 +27,11 @@ class AchievementsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func facebookShareBTN(_ sender: Any){
+        faceShareBTNPressed?()
+        //print("button pressed")
     }
 
 }

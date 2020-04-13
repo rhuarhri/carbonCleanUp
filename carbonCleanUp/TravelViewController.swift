@@ -26,6 +26,18 @@ class TravelViewController: UIViewController {
     
     @IBOutlet weak var travelMV: MKMapView!
     
+    
+    @IBAction func backBTNPressed(_ sender: Any) {
+        
+        if recordingDistance == true
+        {
+            saveEmmissions(emission: Float(emmission))
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
     var locationManager : CLLocationManager!
     
     override func viewDidLoad() {
@@ -105,104 +117,12 @@ class TravelViewController: UIViewController {
     func load()
     {
         
-        /*
-        guard let appDelegate =
-          UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext =
-          appDelegate.persistentContainer.viewContext
-        
-        do {
-            
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Vehicle")
-            cars = try managedContext.fetch(fetchRequest)
-            
-        } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
-        }*/
-        
         dataManager.setUp()
         cars = dataManager.getVehicle()
         
         carsPicker.reloadAllComponents()
         
-        //drawRoute()
-        
-        
     }
-    
-    /*
-    func drawRoute()
-    {
-        let sourceLocation = CLLocationCoordinate2D(latitude: 40.759011, longitude: -73.984472)
-        let destinationLocation = CLLocationCoordinate2D(latitude: 40.748441, longitude: -73.985564)
-        
-        var route : [CLLocationCoordinate2D] = []
-        route.append(sourceLocation)
-        route.append(destinationLocation)
-        
-        let line = MKPolyline(coordinates: route, count: route.count)
-        
-        self.travelMV.addOverlay(line)
-        
-    }
-    
-    func recordRoute()
-    {
-        let sourceLocation = CLLocationCoordinate2D(latitude: 40.759011, longitude: -73.984472)
-        let destinationLocation = CLLocationCoordinate2D(latitude: 40.748441, longitude: -73.985564)
-        
-        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
-        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
-        
-        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
-        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-        
-        let sourceAnnotation = MKPointAnnotation()
-        sourceAnnotation.title = "Times Square"
-        
-        if let location = sourcePlacemark.location {
-            sourceAnnotation.coordinate = location.coordinate
-        }
-        
-        
-        let destinationAnnotation = MKPointAnnotation()
-        destinationAnnotation.title = "Empire State Building"
-        
-        if let location = destinationPlacemark.location {
-            destinationAnnotation.coordinate = location.coordinate
-        }
-        
-        self.travelMV.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true )
-        
-        let directionRequest = MKDirections.Request()
-        directionRequest.source = sourceMapItem
-        directionRequest.destination = destinationMapItem
-        directionRequest.transportType = .automobile
-        
-        // Calculate the direction
-        let directions = MKDirections(request: directionRequest)
-        
-        directions.calculate {
-            (response, error) -> Void in
-            
-            guard let response = response else {
-                if let error = error {
-                    print("Error: \(error)")
-                }
-                
-                return
-            }
-            
-            let route = response.routes[0]
-            self.travelMV.addOverlay((route.polyline), level: MKOverlayLevel.aboveRoads)
-            
-            let rect = route.polyline.boundingMapRect
-            self.travelMV.setRegion(MKCoordinateRegion(rect), animated: true)
-        }
-    }*/
     
     var previousLocation : CLLocation? = nil
     var distance : Double = 0
@@ -235,6 +155,8 @@ class TravelViewController: UIViewController {
     {
         actionBTN.setTitle("Start", for: .normal)
         recordingDistance = false
+        saveEmmissions(emission: Float(emmission))
+        self.dismiss(animated: true, completion: nil)
     }
     
     func saveTravel()
@@ -327,34 +249,6 @@ class TravelViewController: UIViewController {
     
     func saveEmmissions(emission : Float)
     {
-        //should move into class
-        
-        /*
-        guard let appDelegate =
-          UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext =
-          appDelegate.persistentContainer.viewContext
-        
-        let entity =
-         NSEntityDescription.entity(forEntityName: "Emissions", in: managedContext)
-         
-         let item = NSManagedObject(entity: entity!, insertInto: managedContext)
-         
-        
-         
-         item.setValue(emmission, forKey: "total")
-         
-         do{
-             try managedContext.save()
-         }
-         catch
-         {
-             print(error)
-         }*/
-        
         dataManager.setUp()
         dataManager.addEmmission(emission: emission)
     }
@@ -388,13 +282,13 @@ extension TravelViewController: CLLocationManagerDelegate, MKMapViewDelegate {
             //print("distance is \(distance)")
             //print("carbon per mile is \(carbonPerMile)")
             //distance = round(distance / 0.01) * 0.01
-            emmission = round(emmission / 100) //* 0.01
+            emmission = round(emmission / 10) * 10
             if (recordingDistance == true)
             {
-                self.distanceTXT.text = "\(emmission)"
+                self.distanceTXT.text = "\(round(emmission / 100))"
             }
             
-            print("emission is \(emmission)")
+            //print("emission is \(emmission)")
             
             previousLocation = location
             
@@ -407,39 +301,7 @@ extension TravelViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         //checkLocationPermission()
     }
     
-    /*
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        // Make sure we are rendering a polyline.
-        guard let polyline = overlay as? MKPolyline else {
-            return MKOverlayRenderer()
-        }
-
-        // Create a specialized polyline renderer and set the polyline properties.
-        let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-        polylineRenderer.strokeColor = .black
-        polylineRenderer.lineWidth = 2
-        return polylineRenderer
-    }*/
-    
 }
-
-/*
-extension TravelViewController: MKMapViewDelegate
-{
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        // Make sure we are rendering a polyline.
-        guard let polyline = overlay as? MKPolyline else {
-            return MKOverlayRenderer()
-        }
-
-        // Create a specialized polyline renderer and set the polyline properties.
-        let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-        polylineRenderer.strokeColor = .black
-        polylineRenderer.lineWidth = 2
-        return polylineRenderer
-    }
-}*/
 
 extension TravelViewController: UIPickerViewDataSource
 {

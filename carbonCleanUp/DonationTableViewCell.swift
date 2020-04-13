@@ -12,8 +12,15 @@ class DonationTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var nameTXT: UILabel!
+    var name = ""
     
     @IBOutlet weak var descriptionTXT: UITextView!
+    
+    @IBOutlet weak var treeAmountTXT: UILabel!
+    
+    @IBOutlet weak var AddTreeStepper: UIStepper!
+    
+    var treeAmount = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,8 +33,10 @@ class DonationTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
+    var action : (() -> Void)? = nil
     @IBAction func addBTNPressed(_ sender: Any) {
+        action?()
+        treeAmountTXT.text = treeAmount.description
     }
     
 }

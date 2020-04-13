@@ -16,6 +16,11 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var itemsTV: UITableView!
     
+    @IBAction func backBTNPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     var electronics : [NSManagedObject] = []
     
     var tableCells : [RecordTableViewCell] = []

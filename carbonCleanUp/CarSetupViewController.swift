@@ -19,7 +19,12 @@ class CarSetupViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var vehicles : [NSManagedObject] = []
     let dataManager : DatabaseManger = DatabaseManger()
-
+    
+    
+    @IBAction func backBTNPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,37 +61,6 @@ class CarSetupViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func save(name : String, type : String, fuel : String?)
     {
-        /*
-        guard let appDelegate =
-          UIApplication.shared.delegate as? AppDelegate else {
-          return
-        }
-        
-        let managedContext =
-        appDelegate.persistentContainer.viewContext
-        
-        let entity =
-        NSEntityDescription.entity(forEntityName: "Vehicle", in: managedContext)
-        
-        let item = NSManagedObject(entity: entity!, insertInto: managedContext)
-        
-        item.setValue(name, forKey: "name")
-        item.setValue(type, forKey: "type")
-        
-        item.setValue(fuel!, forKey: "fuel")
-        
-    
-        vehicles.append(item)
-        
-        
-        do{
-            try managedContext.save()
-        }
-        catch
-        {
-            print(error)
-        }*/
-        
         dataManager.setUp()
         vehicles.append(dataManager.addVehicle(name : name, type : type, fuel : fuel!))
         
@@ -127,7 +101,7 @@ class CarSetupViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func addVehicleBTN(_ sender: Any)
     {
         let vehicleType : String = vehicleTypeSelector.titleForSegment(at: vehicleTypeSelector.selectedSegmentIndex)!
-        var vehicleFuel = vehicleType == "small car" ?
+        let vehicleFuel = vehicleType == "small car" ?
         "petrol" : "diesel"
         
         save(name: vehicleNameTF.text!, type: vehicleType, fuel: vehicleFuel)
@@ -139,7 +113,6 @@ class CarSetupViewController: UIViewController, UITableViewDataSource, UITableVi
             if let destination = segue.destination as? PopupViewController
             {
                 destination.message = "vehicle"
-                //print((sender! as? String)!)
             }
         }
     }
@@ -165,7 +138,7 @@ class CarSetupViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 95
+        return 55
     }
 
 }

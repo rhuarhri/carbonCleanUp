@@ -8,17 +8,22 @@
 
 import UIKit
 
+
 class WelcomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let notification = NotificationHandler()
+        notification.displayNotification()
     }
     
     @IBAction func nextBTNPressed(_ sender: Any) {
         
         let dataManager : DatabaseManger = DatabaseManger()
+        
         
         dataManager.setUp()
         var setupRequired : Bool = dataManager.databaseEmpty()
@@ -32,6 +37,10 @@ class WelcomeViewController: UIViewController {
             self.performSegue(withIdentifier: "noSetup", sender: nil)
         }
         
+        
+        
     }
+    
+    
     
 }
